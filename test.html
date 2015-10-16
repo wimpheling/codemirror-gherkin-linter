@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="./gherkin.min.js"></script>
+	<script src="
+https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.7.0/codemirror.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.7.0/codemirror.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.7.0/addon/lint/lint.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.7.0/mode/gherkin/gherkin.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.7.0/addon/lint/lint.min.js"></script>
+	<script src="./gherkin-lint.js"></script>
+</head>
+<body>
+	<textarea cols="80" rows="60">@these @_are_ @tags
+Feature: Serve coffee
+  Coffee should not be served until paid for
+  Coffee should not be served until the button has been pressed
+  If there is no coffee left then money should be refunded
+  
+  Scenario Outline: Eating
+    Given there are <start> cucumbers
+    When I eat <eat> cucumbers
+    Then I should have <left> cucumbers
+    This is an error
+
+    Examples:
+      | start | eat | left |
+      |  12   |  5  |  7   |
+      |  @20  |  5  |  15  |    
+      
+Feature: Hello
+  Scenario: Buy last coffee
+    Given there are 1 coffees left in the machine
+    And I have deposited 1$ 
+    When I press the coffee button
+    Then I should be served a "coffee"
+    
+  # this a comment
+  
+  """
+  this is a 
+  pystring
+  """
+  </textarea>	
+  <script>
+  	var parse = function(){
+  		var parser = new Gherkin.Parser();
+  		// $.each(val, function(i,line){
+  			try {
+			  var obj = parser.parse(val.join('\n'));
+			  console.log(obj)
+  			} catch (e) {
+  			  for (var err in e.errors){
+
+  			  }
+  			}
+		// });
+  	};
+  	$(document).ready(function(){
+  		var myCodeMirror = CodeMirror.fromTextArea($('textarea')[0], {
+  			mode: "gherkin",
+  			lineNumbers: true,
+		    gutters: ["CodeMirror-lint-markers"],
+		    lint: true
+  		});
+  		// parse()
+  		// $('textarea').on('input', parse)
+  	});
+  </script>
+</body>
+</html>
