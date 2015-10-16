@@ -2,8 +2,6 @@
 <html>
 <head>
 	<script src="./gherkin.min.js"></script>
-	<script src="
-https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.7.0/codemirror.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.7.0/codemirror.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.7.0/addon/lint/lint.min.css">
@@ -12,7 +10,7 @@ https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
 	<script src="./gherkin-lint.js"></script>
 </head>
 <body>
-	<textarea cols="80" rows="60">@these @_are_ @tags
+	<textarea id="textarea" cols="80" rows="60">@these @_are_ @tags
 Feature: Serve coffee
   Coffee should not be served until paid for
   Coffee should not be served until the button has been pressed
@@ -44,29 +42,12 @@ Feature: Hello
   """
   </textarea>	
   <script>
-  	var parse = function(){
-  		var parser = new Gherkin.Parser();
-  		// $.each(val, function(i,line){
-  			try {
-			  var obj = parser.parse(val.join('\n'));
-			  console.log(obj)
-  			} catch (e) {
-  			  for (var err in e.errors){
-
-  			  }
-  			}
-		// });
-  	};
-  	$(document).ready(function(){
-  		var myCodeMirror = CodeMirror.fromTextArea($('textarea')[0], {
-  			mode: "gherkin",
-  			lineNumbers: true,
-		    gutters: ["CodeMirror-lint-markers"],
-		    lint: true
-  		});
-  		// parse()
-  		// $('textarea').on('input', parse)
-  	});
+  CodeMirror.fromTextArea(document.getElementById('textarea'), {
+		mode: "gherkin",
+		lineNumbers: true,
+    gutters: ["CodeMirror-lint-markers"],
+    lint: true
+  });
   </script>
 </body>
 </html>
