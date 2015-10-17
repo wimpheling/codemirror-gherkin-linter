@@ -18,8 +18,7 @@
 CodeMirror.registerHelper("lint", "gherkin", function(text) {
   var found = [];
   var parser = new Gherkin.Parser();
-      // $.each(val, function(i,line){
-  try { parser.parse(text); } 
+  try { parser.parse(text, new Gherkin.TokenMatcher('en')); } 
   catch (e) { 
     for (var err in e.errors){
       err = e.errors[err];

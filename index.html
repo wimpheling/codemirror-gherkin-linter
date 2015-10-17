@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script src="./gherkin.min.js"></script>
+	<meta charset="UTF-8">
+  <script src="./gherkin.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.7.0/codemirror.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.7.0/codemirror.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.7.0/addon/lint/lint.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.7.0/mode/gherkin/gherkin.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.7.0/mode/gherkin/gherkin.js"  charset="UTF-8"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.7.0/addon/lint/lint.min.js"></script>
 	<script src="./gherkin-lint.js"></script>
 </head>
 <body>
+  <h1>Demo for codemirror-gherkin-linter</h1>
+  <p>
+    Github : <a href="https://github.com/wimpheling/codemirror-gherkin-linter">https://github.com/wimpheling/codemirror-gherkin-linter</a>
+  </p>
 	<textarea id="textarea" cols="80" rows="60">@these @_are_ @tags
 Feature: Serve coffee
   Coffee should not be served until paid for
@@ -45,8 +50,9 @@ Feature: Hello
   CodeMirror.fromTextArea(document.getElementById('textarea'), {
 		mode: "gherkin",
 		lineNumbers: true,
-    gutters: ["CodeMirror-lint-markers"],
-    lint: true
+    gutters: ["CodeMirror-lint-markers", "CodeMirror-foldgutter"],
+    lint: true,
+    foldGutter: true
   });
   </script>
 </body>
